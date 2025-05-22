@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pizzaria Delícia</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+   rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+   href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+   rel="stylesheet"
+  />
+ </head>
+ <body>
+  <div class="loading-screen">
+   <div class="pizza-loader">
+    <div class="pizza-slice"></div>
+   </div>
+   <p>Preparando sua experiência...</p>
+  </div>
+
+  <header>
+   <nav class="navbar">
+    <div class="logo">
+     <h1>Pizzaria <span>Delícia</span></h1>
+    </div>
+    <div class="nav-links">
+     <ul>
+      <li><a href="#home" class="nav-link">Home</a></li>
+      <li><a href="#menu" class="nav-link">Menu</a></li>
+      <li><a href="#about" class="nav-link">Sobre</a></li>
+      <li><a href="#contact" class="nav-link">Contato</a></li>
+     </ul>
+    </div>
+    <div class="user-actions">
+     <div class="user-info hidden">
+      <span class="username">Olá, <span id="user-name"></span></span>
+      <button id="logout-btn" class="btn-small">Sair</button>
+     </div>
+     <button id="login-btn" class="btn-small">Entrar</button>
+    </div>
+    <div class="hamburger">
+     <span class="bar"></span>
+     <span class="bar"></span>
+     <span class="bar"></span>
+    </div>
+   </nav>
+  </header>
+
+  <main>
+   <section id="home" class="hero">
+    <div class="hero-content">
+     <h1 class="animate-pop">Bem-vindo à <span>Pizzaria Delícia</span></h1>
+     <p class="animate-slide-up">
+      As melhores pizzas artesanais da cidade. Feitas com ingredientes
+      selecionados e muito amor.
+     </p>
+     <a href="#menu" class="btn btn-primary animate-pop">Ver Menu</a>
+    </div>
+    <div class="hero-image animate-slide-in">
+     <div class="pizza-bg"></div>
+    </div>
+   </section>
+
+   <section id="menu" class="menu-section">
+    <div class="section-title">
+     <h2>Nosso Menu</h2>
+     <div class="underline"></div>
+    </div>
+
+    <div class="menu-filters">
+     <button class="filter-btn active" data-category="all">Todas</button>
+     <button class="filter-btn" data-category="classicas">Clássicas</button>
+     <button class="filter-btn" data-category="especiais">Especiais</button>
+     <button class="filter-btn" data-category="doces">Doces</button>
+    </div>
+
+    <div class="menu-grid">
+     <!-- Menu items will be populated by JavaScript -->
+    </div>
+   </section>
+
+   <section id="about" class="about-section">
+    <div class="section-title">
+     <h2>Sobre Nós</h2>
+     <div class="underline"></div>
+    </div>
+
+    <div class="about-content">
+     <div class="about-image animate-on-scroll">
+      <div class="pizza-chef"></div>
+     </div>
+     <div class="about-text animate-on-scroll">
+      <h3>Nossa História</h3>
+      <p>
+       Desde 1995, a Pizzaria Delícia vem encantando paladares com receitas
+       tradicionais italianas e inovações deliciosas. Nossa massa é preparada
+       diariamente, seguindo uma receita familiar passada por gerações.
+      </p>
+      <p>
+       Nossos ingredientes são cuidadosamente selecionados e todas as pizzas são
+       assadas em forno à lenha, garantindo aquele sabor único que só uma
+       verdadeira pizzaria italiana pode oferecer.
+      </p>
+      <h3>Nossa Missão</h3>
+      <p>
+       Proporcionar momentos de felicidade através de pizzas perfeitas, servidas
+       com amor e dedicação, mantendo viva a tradição e qualidade que nos
+       tornaram referência na cidade.
+      </p>
+     </div>
+    </div>
+   </section>
+
+   <section id="contact" class="contact-section">
+    <div class="section-title">
+     <h2>Contato</h2>
+     <div class="underline"></div>
+    </div>
+
+    <div class="contact-container">
+     <div class="contact-info animate-on-scroll">
+      <h3>Informações</h3>
+      <div class="info-item">
+       <i class="fas fa-map-marker-alt"></i>
+       <p>Av. Pizzaria, 1234 - Centro</p>
+      </div>
+      <div class="info-item">
+       <i class="fas fa-phone"></i>
+       <p>(11) 99999-9999</p>
+      </div>
+      <div class="info-item">
+       <i class="fas fa-envelope"></i>
+       <p>
+        <a
+         href="/cdn-cgi/l/email-protection"
+         class="__cf_email__"
+         data-cfemail="660509081207120926160f1c1c07140f0702030a0f050f074805090b"
+         >[email&#160;protected]</a
+        >
+       </p>
+      </div>
+      <div class="info-item">
+       <i class="fas fa-clock"></i>
+       <p>Seg. a Dom.: 18h às 23h</p>
+      </div>
+
+      <div class="social-links">
+       <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+       <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+       <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+      </div>
+     </div>
+
+     <div class="contact-form animate-on-scroll">
+      <h3>Envie uma mensagem</h3>
+      <form id="contact-form">
+       <div class="form-group">
+        <input type="text" id="contact-name" placeholder="Seu nome" required />
+       </div>
+       <div class="form-group">
+        <input
+         type="email"
+         id="contact-email"
+         placeholder="Seu email"
+         required
+        />
+       </div>
+       <div class="form-group">
+        <textarea
+         id="contact-message"
+         placeholder="Sua mensagem"
+         required
+        ></textarea>
+       </div>
+       <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+      </form>
+     </div>
+    </div>
+   </section>
+  </main>
+
+  <footer>
+   <div class="footer-content">
+    <div class="footer-logo">
+     <h2>Pizzaria <span>Delícia</span></h2>
+     <p>A melhor experiência em pizza</p>
+    </div>
+
+    <div class="footer-links">
+     <h3>Links Rápidos</h3>
+     <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">Sobre</a></li>
+      <li><a href="#contact">Contato</a></li>
+     </ul>
+    </div>
+
+    <div class="footer-hours">
+     <h3>Horário de Funcionamento</h3>
+     <p>Segunda a Sexta: 18h às 23h</p>
+     <p>Sábados e Domingos: 17h às 00h</p>
+    </div>
+   </div>
+
+   <div class="footer-bottom">
+    <p>&copy; 2024 Pizzaria Delícia. Todos os direitos reservados.</p>
+   </div>
+  </footer>
+
+  <!-- Login/Register Modal -->
+  <div id="auth-modal" class="modal">
+   <div class="modal-content">
+    <span class="close-modal">&times;</span>
+
+    <div class="auth-tabs">
+     <button class="tab-btn active" data-tab="login">Login</button>
+     <button class="tab-btn" data-tab="register">Cadastro</button>
+    </div>
+
+    <div id="login-tab" class="tab-content active">
+     <h2>Login</h2>
+     <form id="login-form">
+      <div class="form-group">
+       <label for="login-email">Email</label>
+       <input type="email" id="login-email" required />
+      </div>
+      <div class="form-group">
+       <label for="login-password">Senha</label>
+       <input type="password" id="login-password" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Entrar</button>
+      <p class="error-message" id="login-error"></p>
+     </form>
+    </div>
+
+    <div id="register-tab" class="tab-content">
+     <h2>Cadastro</h2>
+     <form id="register-form">
+      <div class="form-group">
+       <label for="register-name">Nome Completo</label>
+       <input type="text" id="register-name" required />
+      </div>
+      <div class="form-group">
+       <label for="register-email">Email</label>
+       <input type="email" id="register-email" required />
+      </div>
+      <div class="form-group">
+       <label for="register-phone">Telefone</label>
+       <input type="tel" id="register-phone" required />
+      </div>
+      <div class="form-group">
+       <label for="register-age">Idade</label>
+       <input type="number" id="register-age" min="18" max="120" required />
+      </div>
+      <div class="form-group">
+       <label for="register-password">Senha</label>
+       <input type="password" id="register-password" required />
+      </div>
+      <div class="form-group">
+       <label for="register-confirm-password">Confirmar Senha</label>
+       <input type="password" id="register-confirm-password" required />
+      </div>
+      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      <p class="error-message" id="register-error"></p>
+      <p class="success-message" id="register-success"></p>
+     </form>
+    </div>
+   </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">
+   <div class="toast-content">
+    <i class="fas fa-check-circle"></i>
+    <div class="toast-message">Mensagem aqui</div>
+   </div>
+   <div class="toast-progress"></div>
+  </div>
+
+  <script
+   data-cfasync="false"
+   src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+  ></script>
+  <script src="script.js"></script>
+  <script src="assets/pizza-bg.js"></script>
+ </body>
+</html>
