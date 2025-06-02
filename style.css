@@ -107,11 +107,14 @@ section {
 
 .pizza-slice {
  position: absolute;
- width: 0;
- height: 0;
- border-left: 50px solid transparent;
- border-right: 50px solid transparent;
- border-bottom: 85px solid var(--accent-color);
+ width: 120px;
+ height: 120px;
+ background-image: url('https://bing.com/th/id/BCO.f13abd67-19de-4ede-8c91-11dafee9bcfe.png');
+
+ background-position: center;
+ background-size: cover;
+ background-repeat: no-repeat;
+
  top: 0;
  left: 0;
  transform-origin: 50% 0;

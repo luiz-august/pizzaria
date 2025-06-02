@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Show loading screen for 2 seconds
   setTimeout(() => {
    document.querySelector('.loading-screen').classList.add('hidden');
-  }, 2000);
+  }, 10000);
 
   // Setup event listeners
   setupNavigation();
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
  }
 
- // Authentication system (login/register)
+ // Sistema de autenticação (login/registro)
  function setupAuthSystem() {
   const loginBtn = document.getElementById('login-btn');
   const authModal = document.getElementById('auth-modal');
@@ -242,43 +242,40 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // Handle login form submission
-  loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', async (e) => {
    e.preventDefault();
 
    const email = document.getElementById('login-email').value;
    const password = document.getElementById('login-password').value;
    const errorMsg = document.getElementById('login-error');
 
-   // Get users from local storage
-   const users = JSON.parse(localStorage.getItem('pizzariaUsers')) || [];
+   const scriptUrl =
+    'https://script.google.com/macros/s/AKfycbwBVC-EGqNy7fNVJotoHAbBJKz7owhrPP3Bz7W8HGfXHvWrBjR6pp9wYV-dg_qvBAx9_A/exec';
 
-   // Find user with matching email and password
-   const user = users.find((u) => u.email === email && u.password === password);
+   try {
+    const response = await fetch(
+     `${scriptUrl}?email=${email}&senha=${password}`
+    );
+    const result = await response.text();
 
-   if (user) {
-    // Store logged in user
-    localStorage.setItem('currentUser', JSON.stringify(user));
-
-    // Update UI to show logged in state
-    updateUserState(user);
-
-    // Close modal
-    authModal.classList.remove('open');
-
-    // Show success message
-    showToast(`Bem-vindo de volta, ${user.name}!`, 'success');
-
-    // Reset form
-    loginForm.reset();
-    errorMsg.textContent = '';
-   } else {
-    // Show error message
-    errorMsg.textContent = 'Email ou senha incorretos. Tente novamente.';
+    if (result === 'Logado') {
+     localStorage.setItem('currentUser', JSON.stringify({ email }));
+     updateUserState({ email });
+     authModal.classList.remove('open');
+     showToast(`Bem-vindo de volta, ${email}!`, 'success');
+     loginForm.reset();
+     errorMsg.textContent = '';
+    } else {
+     errorMsg.textContent = 'Email ou senha incorretos. Tente novamente.';
+    }
+   } catch (error) {
+    console.error('Erro ao conectar com servidor:', error);
+    errorMsg.textContent = 'Erro ao validar login. Tente novamente mais tarde.';
    }
   });
 
-  // Handle registration form submission
-  registerForm.addEventListener('submit', (e) => {
+  // Lidar com a submissão do formulário de registro
+  registerForm.addEventListener('submit', async (e) => {
    e.preventDefault();
 
    const name = document.getElementById('register-name').value;
@@ -286,61 +283,37 @@ document.addEventListener('DOMContentLoaded', function () {
    const phone = document.getElementById('register-phone').value;
    const age = document.getElementById('register-age').value;
    const password = document.getElementById('register-password').value;
-   const confirmPassword = document.getElementById(
-    'register-confirm-password'
-   ).value;
    const errorMsg = document.getElementById('register-error');
    const successMsg = document.getElementById('register-success');
 
-   // Validate form
-   if (password !== confirmPassword) {
-    errorMsg.textContent = 'As senhas não conferem';
-    successMsg.textContent = '';
-    return;
+   const scriptUrl =
+    'https://script.google.com/macros/s/AKfycbwBVC-EGqNy7fNVJotoHAbBJKz7owhrPP3Bz7W8HGfXHvWrBjR6pp9wYV-dg_qvBAx9_A/exec';
+
+   try {
+    const response = await fetch(scriptUrl, {
+     method: 'POST',
+     headers: { 'Content-Type': 'application/json' },
+     body: JSON.stringify({ name, email, phone, age, password }),
+    });
+
+    const result = await response.text();
+    if (result.includes('sucesso')) {
+     successMsg.textContent =
+      'Cadastro realizado com sucesso! Você já pode fazer login.';
+     errorMsg.textContent = '';
+     registerForm.reset();
+
+     setTimeout(() => {
+      document.querySelector('.tab-btn[data-tab="login"]').click();
+      successMsg.textContent = '';
+     }, 2000);
+    } else {
+     errorMsg.textContent = 'Erro ao cadastrar. Tente novamente.';
+    }
+   } catch (error) {
+    console.error('Erro ao conectar com servidor:', error);
+    errorMsg.textContent = 'Erro ao enviar cadastro.';
    }
-
-   // Get existing users or initialize empty array
-   const users = JSON.parse(localStorage.getItem('pizzariaUsers')) || [];
-
-   // Check if user already exists
-   if (users.some((user) => user.email === email)) {
-    errorMsg.textContent = 'Este email já está cadastrado';
-    successMsg.textContent = '';
-    return;
-   }
-
-   // Create new user object
-   const newUser = {
-    id: Date.now(),
-    name,
-    email,
-    phone,
-    age,
-    password,
-    registeredAt: new Date().toISOString(),
-   };
-
-   // Add user to array and save to localStorage
-   users.push(newUser);
-   localStorage.setItem('pizzariaUsers', JSON.stringify(users));
-
-   // Show success message
-   errorMsg.textContent = '';
-   successMsg.textContent =
-    'Cadastro realizado com sucesso! Você já pode fazer login.';
-
-   // In a real application, you would also store this data to a server
-   // For example, sending it to Google Drive as requested
-   simulateSendingToExternalStorage(newUser);
-
-   // Reset form after successful registration
-   registerForm.reset();
-
-   // Automatically switch to login tab after 2 seconds
-   setTimeout(() => {
-    document.querySelector('.tab-btn[data-tab="login"]').click();
-    successMsg.textContent = '';
-   }, 2000);
   });
 
   // Handle logout

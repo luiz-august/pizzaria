@@ -242,7 +242,11 @@
 
     <div id="register-tab" class="tab-content">
      <h2>Cadastro</h2>
-     <form id="register-form">
+     <form
+      action="https://api.sheetmonkey.io/form/5rN6n1ao6bQN13poohTrhJ"
+      method="post"
+      id="register-form"
+     >
       <div class="form-group">
        <label for="register-name">Nome Completo</label>
        <input type="text" id="register-name" required />
@@ -267,7 +271,9 @@
        <label for="register-confirm-password">Confirmar Senha</label>
        <input type="password" id="register-confirm-password" required />
       </div>
-      <button type="submit" class="btn btn-primary">Cadastrar</button>
+      <button type="submit" value="submit" class="btn btn-primary">
+       Cadastrar
+      </button>
       <p class="error-message" id="register-error"></p>
       <p class="success-message" id="register-success"></p>
      </form>
@@ -283,12 +289,9 @@
    </div>
    <div class="toast-progress"></div>
   </div>
-
-  <script
-   data-cfasync="false"
-   src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
-  ></script>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="script.js"></script>
   <script src="assets/pizza-bg.js"></script>
+  <div id="googleSignInDiv"></div>
  </body>
 </html>
